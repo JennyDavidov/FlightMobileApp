@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".ControlScreen">
 
+    <com.jackandphantom.joystickview.JoyStickView
+        android:id="@+id/joyStickView"
+        android:layout_width="521dp"
+        android:layout_height="391dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="276dp"
+        app:innerCircleColor="@color/black"
+        app:innerCircleRadius="0.14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lockCenter="false"
+        app:outerCircleBorderColor="@color/white"
+        app:outerCircleBorderWidth="5"
+        app:outerCircleColor="@color/silver"
+        app:shadowColor="@color/black"
+        app:shadowRadius="7" />
 </androidx.constraintlayout.widget.ConstraintLayout>
