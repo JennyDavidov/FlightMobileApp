@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 local1.append("\n")
             }
             cursor.close()
+            //test
         }
 
 

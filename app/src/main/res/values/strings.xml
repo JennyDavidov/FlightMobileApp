@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">FlightMobileApp</string>
-    <string name="text_msg">localHost1</string>
+    <string name="text_msg1">localHost1</string>
+    <string name="text_msg2">localHost2</string>
+    <string name="text_msg3">localHost3</string>
+    <string name="text_msg4">localHost4</string>
+    <string name="text_msg5">localHost5</string>
+    <string name="TypeURL">Type URL</string>
+    <string name="ConnectButton">Connect</string>
 </resources>
