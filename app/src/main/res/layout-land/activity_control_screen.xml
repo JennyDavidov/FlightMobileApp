@@ -2,34 +2,79 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".ControlScreen">
 
-    <com.jackandphantom.joystickview.JoyStickView
+    <io.github.controlwear.virtual.joystick.android.JoystickView
         android:id="@+id/joyStickView"
-        android:layout_width="521dp"
-        android:layout_height="391dp"
+        android:layout_width="378dp"
+        android:layout_height="274dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        app:innerCircleColor="@color/black"
-        app:innerCircleRadius="0.14"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="24dp"
+        app:JV_autoReCenterButton="true"
+        app:JV_backgroundColor="@color/silver"
+        app:JV_borderColor="@color/silver"
+        app:JV_buttonColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simulator_img"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lockCenter="false"
-        app:outerCircleBorderColor="@color/white"
-        app:outerCircleBorderWidth="5"
-        app:outerCircleColor="@color/silver"
-        app:shadowColor="@color/black"
-        app:shadowRadius="7" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/simulator_img"
-        android:layout_width="324dp"
+        android:layout_width="250dp"
         android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="170dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="376dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/joyStickView" />
+
+    <SeekBar
+        android:id="@+id/seekBar2"
+        android:layout_width="156dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="64dp"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="18dp"
+        android:text="@string/Throttle"
+        app:layout_constraintBottom_toTopOf="@+id/seekBar2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/Rudder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simulator_img" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
