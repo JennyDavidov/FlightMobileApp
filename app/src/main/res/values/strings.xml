@@ -7,6 +7,7 @@
     <string name="text_msg5">localHost5</string>
     <string name="TypeURL">Type URL</string>
     <string name="ConnectButton">Connect</string>
+    <string name="Connection">Connect</string>
     <string name="Throttle">Throttle: 0</string>
     <string name="Rudder">Rudder: 0</string>
 </resources>
