@@ -1,20 +1,61 @@
 package com.example.flightmobileapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
-import com.squareup.picasso.Picasso
+import android.widget.SeekBar
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.jackandphantom.joystickview.JoyStickView
+import io.github.controlwear.virtual.joystick.android.JoystickView;
 import kotlinx.android.synthetic.main.activity_control_screen.*
 
+
 class ControlScreen : AppCompatActivity() {
-    private lateinit var simulatorImg: ImageView;
+    var minRudder = -1
+    var minThrottle = 0
+    var maxRudder = 1
+    var maxThrottle = 1
+    var stepRudder = 0.1
+    var stepThrottle = 0.1
     private lateinit var url: String;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_screen)
-        simulatorImg = findViewById<ImageView>(R.id.simulator_img);
-        url = "https://www.google.com/search?q=flightgear&tbm=isch&ved=2ahUKEwi87YKbrIHqAhVQhqQKHc1vBD4Q2-cCegQIABAA&oq=flightgear&gs_lcp=CgNpbWcQAzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzIECAAQEzoECCMQJzoFCAAQsQM6BAgAEEM6BwgAELEDEEM6AggAOgYIABAKEAE6BAgAEAE6BggAEAoQGDoHCCMQ6gIQJzoECAAQHlD4VljojAFg_I0BaAlwAHgAgAGbAYgBthOSAQQwLjE5mAEAoAEBqgELZ3dzLXdpei1pbWewAQo&sclient=img&ei=OB3mXrzxI9CMkgXN35HwAw&bih=610&biw=1280&rlz=1C1CHZL_enIL818IL818#imgrc=yMUdOI1mZLQ9LM";
-        Picasso.get().load(url).into(simulatorImg);
+        url = "http://10.0.2.2:5000/screenshot";
+        Glide.with(simulator_img.context).load(url).into(simulator_img);
+        seekBar1.max = ((maxRudder - minRudder) / stepRudder).toInt();
+        seekBar2.max = ((maxThrottle - minThrottle) / stepThrottle).toInt();
+        seekBar1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                val value: Float = (minRudder + (i * stepRudder)).toFloat()
+                // Display the current progress of SeekBar
+                textView1.text = "Rudder: $value"
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+        seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                val value: Float = (minThrottle + (i * stepThrottle)).toFloat()
+                // Display the current progress of SeekBar
+                textView2.text = "Throttle: $value"
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {
+            }
+            override fun onStopTrackingTouch(seekBar: SeekBar) {
+            }
+        })
+        val joystick: JoystickView = findViewById(R.id.joyStickView) as JoystickView
+        joystick.setOnMoveListener(object : JoystickView.OnMoveListener {
+            override fun onMove(angle: Int, strength: Int) {
+            }
+        })
+//        val joystick: JoyStickView = findViewById(R.id.joyStickView) as JoyStickView
+//        joystick.setOnMoveListener(object : JoyStickView.OnMoveListener {
+//            override fun onMove(angle: Double, strength: Float) {
+//            }
+//        })
     }
 
 }
