@@ -1,5 +1,6 @@
 package com.example.flightmobileapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -95,17 +96,17 @@ class MainActivity : AppCompatActivity() {
                     dbHandler?.localHostDataBaseDao().delete(local)
                     updateListOfLocals(dbHandler)
                 }
-
                 dbHandler?.localHostDataBaseDao().insert(LocalHostObject(this.editTextTextPersonName10.text.toString()))
-                Toast.makeText(this, editTextTextPersonName10.text.toString() + " Added to database",
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(this, editTextTextPersonName10.text.toString() + " Added to database",
+//                    Toast.LENGTH_LONG
+//                ).show()
                 editTextTextPersonName10.text.clear()
+                openActivity(this)
             }
             updateListOfLocals(dbHandler)
         }
     }
-    fun openActivity(view: View) {
+    fun openActivity(context: Context) {
         val intent = Intent(this, ControlScreen::class.java)
         startActivity(intent)
     }

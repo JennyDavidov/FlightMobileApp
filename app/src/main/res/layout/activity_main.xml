@@ -115,7 +115,6 @@
         android:layout_marginTop="85dp"
         android:layout_marginEnd="49dp"
         android:layout_marginBottom="85dp"
-        android:onClick="openActivity"
         android:text="@string/Connection"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
