@@ -16,7 +16,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/text_msg4"
-        android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/text_msg5"
-        android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/text_msg3"
-        android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.636"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/text_msg1"
-        android:inputType="textPersonName"
+
         app:layout_constraintBottom_toTopOf="@+id/local2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
@@ -83,35 +83,43 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/text_msg2"
-        android:inputType="textPersonName"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.647"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="169dp"
-        android:layout_height="57dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@string/ConnectButton" />
-
     <EditText
         android:id="@+id/editTextTextPersonName10"
-        android:layout_width="0dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="536dp"
-        android:layout_marginEnd="33dp"
+        android:layout_width="148dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="67dp"
+        android:layout_marginBottom="85dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textNoSuggestions"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/TypeURL" />
+        app:layout_constraintTop_toBottomOf="@+id/local5"
+        app:layout_constraintVertical_bias="0.4"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="141dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="85dp"
+        android:onClick="openActivity"
+        android:text="@string/Connection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName10"
+        app:layout_constraintTop_toBottomOf="@+id/local5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
