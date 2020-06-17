@@ -7,19 +7,19 @@
     tools:context=".ControlScreen">
 
     <!--        app:innerCircleColor="@color/black"-->
-<!--        app:innerCircleRadius="0.14"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.76"-->
-<!--        app:layout_constraintStart_toEndOf="@+id/seekBar2"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.0"-->
-<!--        app:lockCenter="false"-->
-<!--        app:outerCircleBorderColor="@color/white"-->
-<!--        app:outerCircleBorderWidth="5"-->
-<!--        app:outerCircleColor="@color/silver"-->
-<!--        app:shadowColor="@color/black"-->
-<!--        app:shadowRadius="7" -->
+    <!--        app:innerCircleRadius="0.14"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.76"-->
+    <!--        app:layout_constraintStart_toEndOf="@+id/seekBar2"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:layout_constraintVertical_bias="0.0"-->
+    <!--        app:lockCenter="false"-->
+    <!--        app:outerCircleBorderColor="@color/white"-->
+    <!--        app:outerCircleBorderWidth="5"-->
+    <!--        app:outerCircleColor="@color/silver"-->
+    <!--        app:shadowColor="@color/black"-->
+    <!--        app:shadowRadius="7" -->
 
 
     <io.github.controlwear.virtual.joystick.android.JoystickView
@@ -40,8 +40,8 @@
 
     <ImageView
         android:id="@+id/simulator_img"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
+        android:layout_width="350dp"
+        android:layout_height="286dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toTopOf="@+id/joyStickView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +68,7 @@
         android:text="@string/Rudder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
     <SeekBar
         android:id="@+id/seekBar2"
         android:layout_width="156dp"

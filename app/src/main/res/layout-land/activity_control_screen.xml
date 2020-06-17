@@ -11,10 +11,10 @@
         android:layout_width="378dp"
         android:layout_height="274dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="8dp"
         app:JV_autoReCenterButton="true"
         app:JV_backgroundColor="@color/silver"
         app:JV_borderColor="@color/silver"
@@ -24,12 +24,12 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.516" />
 
     <ImageView
         android:id="@+id/simulator_img"
-        android:layout_width="250dp"
-        android:layout_height="0dp"
+        android:layout_width="339dp"
+        android:layout_height="293dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="10dp"
@@ -41,17 +41,17 @@
         android:id="@+id/seekBar1"
         android:layout_width="170dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="376dp"
+        android:layout_marginEnd="448dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/joyStickView" />
+        app:layout_constraintTop_toBottomOf="@+id/joyStickView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <SeekBar
         android:id="@+id/seekBar2"
-        android:layout_width="156dp"
+        android:layout_width="135dp"
         android:layout_height="165dp"
-        android:layout_marginStart="4dp"
         android:layout_marginBottom="64dp"
         android:rotation="270"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +61,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="30dp"
         android:layout_marginBottom="18dp"
         android:text="@string/Throttle"
         app:layout_constraintBottom_toTopOf="@+id/seekBar2"
@@ -71,7 +71,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="26dp"
         android:layout_marginBottom="4dp"
         android:text="@string/Rudder"
         app:layout_constraintBottom_toBottomOf="parent"
