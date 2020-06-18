@@ -3,6 +3,8 @@ package com.example.flightmobileapp
 import Api
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.Executor
 
 
 class ControlScreen : AppCompatActivity() {
@@ -30,7 +33,17 @@ class ControlScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_screen)
-        showImage()
+
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+
+                showImage()
+                mainHandler.postDelayed(this, 3000)
+            }
+        })
+
+        //showImage()
 //        url = "http://10.0.2.2:5000/screenshot";
 //        Glide.with(simulator_img.context).load(url).into(simulator_img);
         seekBar1.max = ((maxRudder - minRudder) / stepRudder).toInt();
@@ -63,9 +76,12 @@ class ControlScreen : AppCompatActivity() {
             }
         })
     }
+
     fun showImage() {
+        val port = intent.getStringExtra("givenPort")
+        val url = "http://10.0.2.2:".plus(port).plus("/")
         val gson = GsonBuilder().setLenient().create()
-        val retrofit = Retrofit.Builder().baseUrl("http://10.0.2.2:59669/")
+        val retrofit = Retrofit.Builder().baseUrl(url)
             .addConverterFactory(GsonConverterFactory.create(gson)).build()
         val api = retrofit.create(Api::class.java)
         val body = api.getImg().enqueue(object : Callback<ResponseBody> {
