@@ -8,6 +8,8 @@
     <string name="TypeURL">Type URL</string>
     <string name="ConnectButton">Connect</string>
     <string name="Connection">Connect</string>
-    <string name="Throttle">Throttle: 0</string>
-    <string name="Rudder">Rudder: 0</string>
+    <string name="Throttle">Throttle: 0.0</string>
+    <string name="Rudder">Rudder: -1.0</string>
+    <string name="Aileron">Aileron: 0.0</string>
+    <string name="Elevator">Elevator: 0.0</string>
 </resources>

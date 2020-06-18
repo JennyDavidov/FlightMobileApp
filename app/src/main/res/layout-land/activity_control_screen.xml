@@ -41,10 +41,13 @@
         android:id="@+id/seekBar1"
         android:layout_width="170dp"
         android:layout_height="0dp"
+        android:layout_marginStart="113dp"
         android:layout_marginEnd="448dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/joyStickView"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -75,6 +78,37 @@
         android:layout_marginBottom="4dp"
         android:text="@string/Rudder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/simulator_img" />
+        app:layout_constraintEnd_toStartOf="@+id/simulator_img"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/seekBar1"
+        app:layout_constraintTop_toBottomOf="@+id/joyStickView"
+        app:layout_constraintVertical_bias="0.56" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="102dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="200dp"
+        android:text="@string/Aileron"
+        app:layout_constraintBottom_toTopOf="@+id/joyStickView"
+        app:layout_constraintEnd_toStartOf="@+id/simulator_img"
+        app:layout_constraintHorizontal_bias="0.58"
+        app:layout_constraintStart_toEndOf="@+id/joyStickView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="83dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginBottom="320dp"
+        android:rotation="-90"
+        android:text="@string/Elevator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/simulator_img"
+        app:layout_constraintStart_toEndOf="@+id/joyStickView"
+        app:layout_constraintTop_toBottomOf="@+id/simulator_img" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
