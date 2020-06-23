@@ -1,3 +1,4 @@
+import com.example.flightmobileapp.CommandObject
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
@@ -7,32 +8,32 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-data class CommandObject(
-    @Json(name = "aileron") var aileron: Double,
-    @Json(name = "rudder") var rudder: Double,
-    @Json(name = "elevator") var elevator: Double,
-    @Json(name = "throttle") var throttle: Double
-)
-val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
-val retrofit = Retrofit.Builder().addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl("http://10.0.2.2:59669/").build()
+var BASE_URL = "http://10.0.2.2:"
 object TodoApi {
     val retrofitService: Api by lazy {
-        retrofit.create(Api ::class.java)
+        val retrofit1 = Retrofit.Builder().addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .baseUrl(BASE_URL).build()
+        retrofit1.create(Api ::class.java)
+    }
+    fun setUrl(port: String) {
+        BASE_URL = BASE_URL.plus(port).plus("/")
     }
 }
+val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
 var viewModelJob = Job()
 val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 interface Api {
     @GET("/screenshot")
     fun getImg(): Call<ResponseBody>
-    @POST()
+    @POST("/api/command")
     fun setJoystickValues(@Body updateCommand: CommandObject): Deferred<ResponseBody>
 }

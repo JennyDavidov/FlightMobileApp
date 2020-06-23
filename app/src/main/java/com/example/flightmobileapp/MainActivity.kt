@@ -129,7 +129,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-
                         Toast.makeText(context, givenUrl + " Invalid URL, try again",
                         Toast.LENGTH_LONG).show()
                     }
@@ -153,9 +152,6 @@ class MainActivity : AppCompatActivity() {
         {
             var url = URL(givenUrl)
             val _port: Int = url.getPort()
-            Toast.makeText(this, _port.toString() + " found port",
-                    Toast.LENGTH_LONG
-                ).show()
             return  _port.toString()
         }
         else{

@@ -1,7 +1,6 @@
 package com.example.flightmobileapp
 
 import Api
-import CommandObject
 import TodoApi.retrofitService
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -22,8 +21,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import moshi
 import okhttp3.ResponseBody
-import retrofit
+//import retrofit1
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,25 +41,20 @@ class ControlScreen : AppCompatActivity() {
     var maxThrottle = 1
     var stepRudder = 0.1
     var stepThrottle = 0.1
+    val command = CommandObject(0.0, 0.0, 0.0, 0.0)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_control_screen)
-        lateinit var command: CommandObject
-        //initialize command object
-        command.aileron = 0.0
-        command.elevator = 0.0
-        command.rudder = 0.0
-        command.throttle = 0.0
+        TodoApi.setUrl(intent.getStringExtra("givenPort").toString())
         showImage()
-      
-        val mainHandler = Handler(Looper.getMainLooper())
-        mainHandler.post(object : Runnable {
-            override fun run() {
-
-                showImage()
-                mainHandler.postDelayed(this, 3000)
-            }
-        })
+//        val mainHandler = Handler(Looper.getMainLooper())
+//        mainHandler.post(object : Runnable {
+//            override fun run() {
+//
+//                showImage()
+//                mainHandler.postDelayed(this, 7000)
+//            }
+//        })
 
         //showImage()
 //        url = "http://10.0.2.2:5000/screenshot";
@@ -71,9 +66,10 @@ class ControlScreen : AppCompatActivity() {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 val value: Double = (minRudder + (i * stepRudder)).toDouble()
                 command.rudder = value
+                val rudderString = String.format("%.2f", value)
                 // Display the current progress of SeekBar
-                textView1.text = "Rudder: $value"
-                postfunction(command)
+                textView1.text = "Rudder: " + rudderString
+                postfunction()
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
@@ -85,8 +81,9 @@ class ControlScreen : AppCompatActivity() {
                 val value: Double = (minThrottle + (i * stepThrottle)).toDouble()
                 command.throttle = value
                 // Display the current progress of SeekBar
-                textView2.text = "Throttle: $value"
-                postfunction(command)
+                val throttleString = String.format("%.2f", value)
+                textView2.text = "Throttle: " + throttleString
+                postfunction()
             }
             override fun onStartTrackingTouch(seekBar: SeekBar) {
             }
@@ -117,9 +114,9 @@ class ControlScreen : AppCompatActivity() {
                 textView3.text = "Aileron: " + aileronString
                 textView4.text = "Elevator: " + elevatorString
                 if (elevator - prevElevator >= 0.02) {
-                    postfunction(command)
+                    postfunction()
                 } else if (aileron - prevAileron >= 0.02) {
-                    postfunction(command)
+                    postfunction()
                 }
             }
         })
@@ -145,14 +142,18 @@ class ControlScreen : AppCompatActivity() {
             }
         })
     }
-    fun postfunction(commandObject: CommandObject) {
+    fun postfunction() {
         uiScope.launch {
-            var deferredResults = TodoApi.retrofitService.setJoystickValues(commandObject)
+            var deferredResults = TodoApi.retrofitService.setJoystickValues(command)
+            println(command.aileron.toString() + ", " + command.rudder.toString() + ", "
+            + command.elevator.toString() + ", " + command.throttle.toString())
             try {
+                var response: ResponseBody= deferredResults.await()
+                println("response:" + response)
                 Toast.makeText(this@ControlScreen, "Set successful",
                     Toast.LENGTH_LONG).show()
-                var response: ResponseBody= deferredResults.await()
             } catch (e: Exception) {
+                println("Exception: " + e.message)
                 Toast.makeText(this@ControlScreen, "Error in server",
                     Toast.LENGTH_LONG).show()
             }
