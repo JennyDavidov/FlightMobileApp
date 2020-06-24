@@ -66,9 +66,7 @@ class MainActivity : AppCompatActivity() {
             local5.text ="no url"
         }
         editTextTextPersonName10.setText("Type URL")
-
         editTextTextPersonName10.setOnFocusChangeListener(OnFocusChangeListener { v, hasFocus -> editTextTextPersonName10.setText("") })
-
         //clicking on existing url will appear in the type url field
         local1.setOnClickListener {
             if (!local1.text.toString().isEmpty()) {
@@ -124,7 +122,7 @@ class MainActivity : AppCompatActivity() {
                             openActivity(context, givenUrl)
                         }
                         else{
-                            Toast.makeText(context, "Failed to load image",
+                            Toast.makeText(context, "Connection error - Image broken",
                                 Toast.LENGTH_LONG).show()
                         }
                     }
@@ -159,9 +157,6 @@ class MainActivity : AppCompatActivity() {
             val updatedUrl = "http://".plus(givenUrl)
             var url = URL(updatedUrl)
             val _port: Int = url.getPort()
-            Toast.makeText(this, _port.toString() + " found port",
-                Toast.LENGTH_LONG
-            ).show()
             return  _port.toString()
         }
     }
