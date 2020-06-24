@@ -9,9 +9,7 @@ import android.os.Looper
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
 import com.google.gson.GsonBuilder
-import com.jackandphantom.joystickview.JoyStickView
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -31,7 +29,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import uiScope
-import java.util.concurrent.Executor
+import kotlin.math.abs
 
 
 class ControlScreen : AppCompatActivity() {
@@ -47,26 +45,20 @@ class ControlScreen : AppCompatActivity() {
         setContentView(R.layout.activity_control_screen)
         TodoApi.setUrl(intent.getStringExtra("givenPort").toString())
         showImage()
-//        val mainHandler = Handler(Looper.getMainLooper())
-//        mainHandler.post(object : Runnable {
-//            override fun run() {
-//
-//                showImage()
-//                mainHandler.postDelayed(this, 7000)
-//            }
-//        })
-
-        //showImage()
-//        url = "http://10.0.2.2:5000/screenshot";
-//        Glide.with(simulator_img.context).load(url).into(simulator_img);
-      
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
+            override fun run() {
+                showImage()
+                mainHandler.postDelayed(this, 3000)
+            }
+        })
         seekBar1.max = ((maxRudder - minRudder) / stepRudder).toInt();
         seekBar2.max = ((maxThrottle - minThrottle) / stepThrottle).toInt();
         seekBar1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 val value: Double = (minRudder + (i * stepRudder)).toDouble()
-                command.rudder = value
-                val rudderString = String.format("%.2f", value)
+                val rudderString = String.format("%.1f", value)
+                command.rudder = rudderString.toDouble()
                 // Display the current progress of SeekBar
                 textView1.text = "Rudder: " + rudderString
                 postfunction()
@@ -79,9 +71,9 @@ class ControlScreen : AppCompatActivity() {
         seekBar2.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                 val value: Double = (minThrottle + (i * stepThrottle)).toDouble()
-                command.throttle = value
+                val throttleString = String.format("%.1f", value)
+                command.throttle = throttleString.toDouble()
                 // Display the current progress of SeekBar
-                val throttleString = String.format("%.2f", value)
                 textView2.text = "Throttle: " + throttleString
                 postfunction()
             }
@@ -104,18 +96,24 @@ class ControlScreen : AppCompatActivity() {
                 prevElevator = command.elevator
                 newY = 100 - joystick.normalizedX
                 aileron = newY.toDouble()
-                aileron = (((aileron/100)*2)-1)
-                command.aileron = aileron
+                aileron = (((aileron/100)*2)-1)*(-1)
+                if (aileron == -0.0) {
+                    aileron = 0.0
+                }
                 elevator = joystick.normalizedY.toDouble()
-                elevator = (((elevator/100)*2)-1)
-                command.elevator = elevator
-                aileronString = String.format("%.2f", aileron)
-                elevatorString = String.format("%.2f", elevator)
+                elevator = (((elevator/100)*2)-1)*(-1)
+                if (elevator == -0.0) {
+                    elevator = 0.0
+                }
+                aileronString = String.format("%.1f", aileron)
+                command.aileron = aileronString.toDouble()
+                elevatorString = String.format("%.1f", elevator)
+                command.elevator = elevatorString.toDouble()
                 textView3.text = "Aileron: " + aileronString
                 textView4.text = "Elevator: " + elevatorString
-                if (elevator - prevElevator >= 0.02) {
+                if (abs(elevator - prevElevator) >= 0.02) {
                     postfunction()
-                } else if (aileron - prevAileron >= 0.02) {
+                } else if (abs(aileron - prevAileron) >= 0.02) {
                     postfunction()
                 }
             }
@@ -139,6 +137,8 @@ class ControlScreen : AppCompatActivity() {
                 }
             }
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(this@ControlScreen, "Connection error - Image broken",
+                    Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -149,12 +149,9 @@ class ControlScreen : AppCompatActivity() {
             + command.elevator.toString() + ", " + command.throttle.toString())
             try {
                 var response: ResponseBody= deferredResults.await()
-                println("response:" + response)
-                Toast.makeText(this@ControlScreen, "Set successful",
-                    Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
                 println("Exception: " + e.message)
-                Toast.makeText(this@ControlScreen, "Error in server",
+                Toast.makeText(this@ControlScreen, "Error in server, try to connect again",
                     Toast.LENGTH_LONG).show()
             }
         }
